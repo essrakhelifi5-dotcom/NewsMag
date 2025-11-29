@@ -1,43 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import { NewsItem } from './NewsItem';
+import React, { useState, useEffect } from "react";
+import { NewsItem } from "./NewsItem";
 
-export const NewsBoard = ({ category }) => {
-  const [articles, setArticles] = useState([]);
+function NewsBoard({ category, searchQuery }) {
+  const [allArticles, setAllArticles] = useState([]);
+  const [filteredArticles, setFilteredArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${import.meta.env.VITE_API_KEY}`;
+    setLoading(true);
+    const url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${
+      import.meta.env.VITE_API_KEY
+    }`;
+
     fetch(url)
-      .then(response => response.json())
-      .then(data => setArticles(data.articles))
-      .catch(err => console.log(err));
+      .then((res) => res.json())
+      .then((data) => {
+        setAllArticles(data.articles || []);
+        setFilteredArticles(data.articles || []);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
   }, [category]);
 
-  return (
-    <div>
-      <h2 className='text-center mt-4'>
-        Latest <span className='badge bg-danger'>News</span>
-      </h2>
+  useEffect(() => {
+    if (!searchQuery) {
+      setFilteredArticles(allArticles);
+    } else {
+      const query = searchQuery.toLowerCase();
+      const filtered = allArticles.filter(
+        (article) =>
+          (article.title && article.title.toLowerCase().includes(query)) ||
+          (article.description &&
+            article.description.toLowerCase().includes(query))
+      );
+      setFilteredArticles(filtered);
+    }
+  }, [searchQuery, allArticles]);
 
-      {/* Conteneur flex pour centrer les cartes */}
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center', // centrer horizontalement
-          gap: '15px',              // espace entre les cartes
-          marginTop: '20px',
-        }}
-      >
-        {articles.map((news, index) => (
-          <NewsItem
-            key={index}
-            title={news.title}
-            description={news.description}
-            src={news.urlToImage}
-            url={news.url}
-          />
-        ))}
-      </div>
+  if (loading) return <p className="text-center mt-4">Loading...</p>;
+
+  if (filteredArticles.length === 0)
+    return <p className="text-center mt-4">No articles found</p>;
+
+  return (
+    <div className="d-flex flex-wrap justify-content-center gap-3 mt-4">
+      {filteredArticles.map((article, i) => (
+        <NewsItem
+          key={i}
+          title={article.title}
+          description={article.description}
+          src={article.urlToImage}
+          url={article.url}
+        />
+      ))}
     </div>
   );
-};
+}
+
+export { NewsBoard };

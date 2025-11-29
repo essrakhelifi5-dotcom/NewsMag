@@ -5,7 +5,7 @@ export const NewsItem = ({ title, description, src, url }) => {
       style={{
         maxWidth: "345px",
         width: "345px",
-        height: "400px",       // hauteur totale de la carte
+        height: "400px", // hauteur totale de la carte
         display: "inline-block",
         verticalAlign: "top",
       }}
@@ -15,7 +15,7 @@ export const NewsItem = ({ title, description, src, url }) => {
         style={{
           height: "200px",
           width: "100%",
-          objectFit: "cover",   // garde les proportions de l'image
+          objectFit: "cover", // garde les proportions de l'image
         }}
         className="card-img-top"
         alt="news"
@@ -23,16 +23,18 @@ export const NewsItem = ({ title, description, src, url }) => {
       <div
         className="card-body"
         style={{
-          height: "180px",          // hauteur fixe de la zone texte
+          height: "180px", // hauteur fixe de la zone texte
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between", // espace entre titre, description et bouton
-          overflow: "hidden",       // coupe le texte si trop long
+          overflow: "hidden", // coupe le texte si trop long
         }}
       >
         <div>
           <h5 className="card-title">{title ? title.slice(0, 50) : ""}</h5>
-          <p className="card-text">{description ? description.slice(0, 90) : ""}</p>
+          <p className="card-text">
+            {description ? description.slice(0, 90) : ""}
+          </p>
         </div>
         <a
           href={url}
