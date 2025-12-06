@@ -1,85 +1,95 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export const Navbar = ({ setCategory }) => {
+export function Navbar({ setCategory, showCategories }) {
   return (
     <nav
       className="navbar navbar-expand-lg bg-body-tertiary"
       data-bs-theme="dark"
     >
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          <span className="badge bg-light text-dark">NewsMag</span>
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+        <Link
+          className="navbar-brand"
+          to="/"
+          onClick={() => setCategory("general")}
         >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                style={{ cursor: "pointer" }}
-                onClick={() => setCategory("technology")}
-              >
-                Technology
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                style={{ cursor: "pointer" }}
-                onClick={() => setCategory("business")}
-              >
-                Business
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                style={{ cursor: "pointer" }}
-                onClick={() => setCategory("health")}
-              >
-                Health
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                style={{ cursor: "pointer" }}
-                onClick={() => setCategory("science")}
-              >
-                Science
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                style={{ cursor: "pointer" }}
-                onClick={() => setCategory("sports")}
-              >
-                Sports
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                style={{ cursor: "pointer" }}
-                onClick={() => setCategory("entertainment")}
-              >
-                Entertainment
-              </a>
-            </li>
-          </ul>
-        </div>
+          <span className="badge bg-light text-dark">NewsMag</span>
+        </Link>
+
+        {showCategories && (
+          <>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    to="/"
+                    onClick={() => setCategory("technology")}
+                  >
+                    Technology
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    to="/"
+                    onClick={() => setCategory("business")}
+                  >
+                    Business
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    to="/"
+                    onClick={() => setCategory("health")}
+                  >
+                    Health
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    to="/"
+                    onClick={() => setCategory("science")}
+                  >
+                    Science
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    to="/"
+                    onClick={() => setCategory("sports")}
+                  >
+                    Sports
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    to="/"
+                    onClick={() => setCategory("entertainment")}
+                  >
+                    Entertainment
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </>
+        )}
       </div>
     </nav>
   );
-};
+}

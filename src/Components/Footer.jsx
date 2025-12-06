@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -9,7 +10,6 @@ function Footer() {
       style={{ color: "white" }}
     >
       <div className="container">
-        {/* Section principale */}
         <div className="row">
           {/* Colonne À propos */}
           <div className="col-md-4 mb-3">
@@ -41,23 +41,31 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Colonne Liens */}
           <div className="col-md-4 mb-3">
             <h6 className="mb-3">Information</h6>
             <ul className="list-unstyled">
               <li className="mb-2">
-                <a href="#" className="text-white text-decoration-none small">
+                <Link
+                  to="/contact"
+                  className="text-white text-decoration-none small"
+                >
                   Contact Us
-                </a>
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link
+                  to="/about"
+                  className="text-white text-decoration-none small"
+                >
+                  About Us
+                </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Séparateur */}
         <hr className="border-secondary my-3" />
 
-        {/* Section copyright */}
         <div className="row">
           <div className="col-md-6 text-center text-md-start">
             <p className="mb-0 small">
@@ -65,7 +73,9 @@ function Footer() {
             </p>
           </div>
           <div className="col-md-6 text-center text-md-end">
-            <p className="mb-0 small">Made with ❤️ for news lovers</p>
+            <p className="mb-0 small">
+              Bringing reliable news to informed minds
+            </p>
           </div>
         </div>
       </div>
