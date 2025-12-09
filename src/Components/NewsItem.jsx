@@ -11,7 +11,7 @@ export const NewsItem = ({ title, description, src, url }) => {
       }}
     >
       <img
-        src={src}
+        src={src ? src : "/images.jpeg"}
         style={{
           height: "200px",
           width: "100%",
